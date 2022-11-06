@@ -7,20 +7,19 @@
 
 import Foundation
 
-protocol Observable {
-    func observe<T>(with onEvent: (Event<T>) -> Void) -> Disposable
+protocol ObservableProtocol {
+    associatedtype Value
+    func observe(with onEvent: @escaping (Event<Value>) -> Void) -> Disposable
 }
 
-final class SimpleObservable<T> {
-    private let producer: ((Event<T>) -> Void) -> Void
+final class Observable<T>: ObservableProtocol {
+    private let producer: (@escaping (Event<T>) -> Void) -> Disposable
 
-    init(producer: @escaping ((Event<T>) -> Void) -> Void) {
+    init(producer: @escaping (@escaping (Event<T>) -> Void) -> Disposable) {
         self.producer = producer
     }
 
-    func observe(with onEvent: (Event<T>) -> Void) -> Disposable {
+    func observe(with onEvent: @escaping (Event<T>) -> Void) -> Disposable {
         self.producer(onEvent)
-
-        return EmptyDisposable()
     }
 }

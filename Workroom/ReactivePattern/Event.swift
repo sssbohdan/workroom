@@ -11,6 +11,17 @@ enum Event<T> {
     case next(T)
     case failure(NSError)
     case completed
+
+    func map<K>(_ f: (T) -> K) -> Event<K> {
+        switch self {
+        case .next(let value):
+            return .next(f(value))
+        case .failure(let error):
+            return .failure(error)
+        case .completed:
+            return .completed
+        }
+    }
 }
 
 extension Event: Equatable where T: Equatable {}

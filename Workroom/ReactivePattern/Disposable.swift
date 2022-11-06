@@ -16,17 +16,29 @@ final class EmptyDisposable: Disposable {
 }
 
 final class BlockDisposable: Disposable {
-    let closure: () -> Void
+    private var closure: (() -> Void)?
 
-    init(closure: @escaping (() -> Void)) {
+    init(closure: (() -> Void)?) {
         self.closure = closure
     }
 
     func dispose() {
-        closure()
+        self.closure?()
+        self.closure = nil
     }
+}
+
+final class DisposeBag {
+    fileprivate var disposables = [Disposable]()
 
     deinit {
-        self.dispose()
+        self.disposables.forEach { $0.dispose() }
+        self.disposables = []
+    }
+}
+
+extension Disposable {
+    func dispose(in bag: DisposeBag) {
+        bag.disposables.append(self)
     }
 }

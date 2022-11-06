@@ -34,6 +34,8 @@
 		8D42176B2916F35500D9C2E0 /* DITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176A2916F35500D9C2E0 /* DITests.swift */; };
 		8D42176D2916F3FE00D9C2E0 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176C2916F3FE00D9C2E0 /* BigInt.swift */; };
 		8D4217712916F5CB00D9C2E0 /* BigIntWithOverlowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176F2916F5CB00D9C2E0 /* BigIntWithOverlowsTests.swift */; };
+		8DB63E162918436600B70F17 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB63E152918436600B70F17 /* Map.swift */; };
+		8DB63E182918521400B70F17 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB63E172918521400B70F17 /* Filter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,8 @@
 		8D42176A2916F35500D9C2E0 /* DITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DITests.swift; sourceTree = "<group>"; };
 		8D42176C2916F3FE00D9C2E0 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
 		8D42176F2916F5CB00D9C2E0 /* BigIntWithOverlowsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntWithOverlowsTests.swift; sourceTree = "<group>"; };
+		8DB63E152918436600B70F17 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		8DB63E172918521400B70F17 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +263,8 @@
 				8D42171A2916F1A200D9C2E0 /* Event.swift */,
 				8D4217182916F1A100D9C2E0 /* Observable.swift */,
 				8D42171B2916F1A200D9C2E0 /* Publishable.swift */,
+				8DB63E152918436600B70F17 /* Map.swift */,
+				8DB63E172918521400B70F17 /* Filter.swift */,
 				8D4216FE2916F18A00D9C2E0 /* ReactivePattern.h */,
 			);
 			path = ReactivePattern;
@@ -601,6 +607,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB63E162918436600B70F17 /* Map.swift in Sources */,
+				8DB63E182918521400B70F17 /* Filter.swift in Sources */,
 				8D42171C2916F1A200D9C2E0 /* Observable.swift in Sources */,
 				8D42171E2916F1A200D9C2E0 /* Event.swift in Sources */,
 				8D42171D2916F1A200D9C2E0 /* Disposable.swift in Sources */,

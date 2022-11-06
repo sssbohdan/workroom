@@ -7,11 +7,13 @@
 
 import Foundation
 
-protocol Publishable: Observable {
-    func send<T>(event: Event<T>)
+protocol PublishableProtocol {
+    associatedtype Value
+
+    func send(event: Event<Value>)
 }
 
-final class PublishSubject<T> {
+final class Publishable<T>: PublishableProtocol, ObservableProtocol {
     private lazy var subsribers = [EquatableEventClosure<T>]()
 
     func observe(with onEvent: @escaping (Event<T>) -> Void) -> Disposable {
@@ -28,5 +30,9 @@ final class PublishSubject<T> {
 
     func send(event: Event<T>) {
         self.subsribers.forEach { $0.closure(event) }
+    }
+
+    func sendNext(_ value: T) {
+        self.subsribers.forEach { $0.closure(.next(value)) }
     }
 }
