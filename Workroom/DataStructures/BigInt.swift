@@ -58,12 +58,12 @@ enum BigInt {
     }
 
 
-    func factorial(n: Int) -> Void {
+    static func factorial(_ n: Int) -> String {
         var acc = "1"
         for x in 2...n {
             acc = Self.multiplication(lhs: acc, rhs: "\(x)")
         }
 
-        print(acc)
+        return acc
     }
 }
