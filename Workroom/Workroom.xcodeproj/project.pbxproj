@@ -34,6 +34,8 @@
 		8D42176B2916F35500D9C2E0 /* DITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176A2916F35500D9C2E0 /* DITests.swift */; };
 		8D42176D2916F3FE00D9C2E0 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176C2916F3FE00D9C2E0 /* BigInt.swift */; };
 		8D4217712916F5CB00D9C2E0 /* BigIntWithOverlowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176F2916F5CB00D9C2E0 /* BigIntWithOverlowsTests.swift */; };
+		8D65C4B929474C5900E5BFEB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65C4B829474C5900E5BFEB /* Queue.swift */; };
+		8D65C4BD2947522800E5BFEB /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65C4BC2947522800E5BFEB /* Stack.swift */; };
 		8DB63E162918436600B70F17 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB63E152918436600B70F17 /* Map.swift */; };
 		8DB63E182918521400B70F17 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB63E172918521400B70F17 /* Filter.swift */; };
 /* End PBXBuildFile section */
@@ -146,6 +148,8 @@
 		8D42176A2916F35500D9C2E0 /* DITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DITests.swift; sourceTree = "<group>"; };
 		8D42176C2916F3FE00D9C2E0 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
 		8D42176F2916F5CB00D9C2E0 /* BigIntWithOverlowsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntWithOverlowsTests.swift; sourceTree = "<group>"; };
+		8D65C4B829474C5900E5BFEB /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		8D65C4BC2947522800E5BFEB /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		8DB63E152918436600B70F17 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		8DB63E172918521400B70F17 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -284,6 +288,8 @@
 				8D42176C2916F3FE00D9C2E0 /* BigInt.swift */,
 				8D4217402916F21000D9C2E0 /* Matrix.swift */,
 				8D4217272916F1F900D9C2E0 /* DataStructures.h */,
+				8D65C4B829474C5900E5BFEB /* Queue.swift */,
+				8D65C4BC2947522800E5BFEB /* Stack.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -628,7 +634,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D65C4BD2947522800E5BFEB /* Stack.swift in Sources */,
 				8D4217412916F21000D9C2E0 /* Matrix.swift in Sources */,
+				8D65C4B929474C5900E5BFEB /* Queue.swift in Sources */,
 				8D42176D2916F3FE00D9C2E0 /* BigInt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
