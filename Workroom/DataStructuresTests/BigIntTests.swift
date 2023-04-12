@@ -28,6 +28,17 @@ final class BigIntTests: XCTestCase {
             )
     }
 
+    func testSubtraction() {
+        XCTAssertEqual("0", BigInt(string: "100").subtract(BigInt(string: "100")).string)
+        XCTAssertEqual("-100", BigInt(string: "0").subtract(BigInt(string: "100")).string)
+        XCTAssertEqual("10", BigInt(string: "110").subtract(BigInt(string: "100")).string)
+    }
+
+    func testAbs() {
+        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "-100").abs)
+        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "100").abs)
+    }
+
     func testMultiplyNumberStrings() {
         XCTAssertEqual("12", BigInt(string: "1").multiply(by: BigInt(string: "12")).string)
         XCTAssertEqual("25", BigInt(string: "5").multiply(by: BigInt(string: "5")).string)
