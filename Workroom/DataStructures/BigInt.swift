@@ -8,13 +8,15 @@
 import Foundation
 
 // TODO: Make it work for negative Integers
-enum BigInt {
-    static func addition(lhs: String, rhs: String) -> String {
-        if lhs == "0" { return rhs }
-        if rhs == "0" { return lhs }
+struct BigInt {
+    let string: String
+
+    func add(_ value: BigInt) -> BigInt {
+        if self.string == "0" { return value }
+        if value.string == "0" { return self }
         
-        var lhs = lhs
-        var rhs = rhs
+        var lhs = self.string
+        var rhs = value.string
         
         if lhs.count < rhs.count {
             lhs = String(repeating: "0", count: rhs.count - lhs.count) + lhs
@@ -32,17 +34,22 @@ enum BigInt {
             movedToNext = sum / 10
             acc = "\(lastDigit)" + acc
         }
-        
-        return movedToNext == 0 ? acc : "\(movedToNext)" + acc
+
+        let string = movedToNext == 0
+        ? acc
+        : "\(movedToNext)" + acc
+
+        return BigInt(string: string)
     }
     
-    static func substraction(lhs: String, rhs: String) -> String {
-        return ""
+    func substract(_ value: BigInt) -> BigInt {
+//        let max = max(lhs, rhs)
+        return value
     }
     
-    static func multiplication(lhs: String, rhs: String) -> String {
-        let lhs = Array(String(lhs.reversed()))
-        let rhs = Array(String(rhs.reversed()))
+    func multiply(by value: BigInt) -> BigInt {
+        let lhs = Array(String(self.string.reversed()))
+        let rhs = Array(String(value.string.reversed()))
         
         var totalAcc = "0"
         for (index, l) in lhs.enumerated() {
@@ -57,9 +64,10 @@ enum BigInt {
             
             acc = movedToNext == 0 ? acc : "\(movedToNext)" + acc
             
-            totalAcc = Self.addition(lhs: totalAcc, rhs: acc)
+            totalAcc = BigInt(string: totalAcc).add(BigInt(string: acc)).string
         }
-        return totalAcc
+
+        return BigInt(string: totalAcc)
     }
     
     //    static func division(lhs: String, rhs: String) -> String {
@@ -82,22 +90,22 @@ enum BigInt {
     //        return ""
     //    }
     
-    static func factorial(_ n: Int) -> String {
-        guard n >= 2 else { return "1" }
+    static func factorial(of n: Int) -> BigInt {
+        guard n >= 2 else { return BigInt(string: "1") }
         var acc = "1"
         for x in 2...n {
-            acc = Self.multiplication(lhs: acc, rhs: "\(x)")
+            acc = BigInt(string: acc).multiply(by: BigInt(string: "\(x)")).string
         }
         
-        return acc
+        return BigInt(string: acc)
     }
     
-    static func isOverflownInteger(_ value: String) -> Bool {
+    var isOverflownInteger: Bool {
         let stringIntMax = String(Int.max)
-        if stringIntMax.count > value.count  {
+        if stringIntMax.count > self.string.count  {
             return false
-        } else if stringIntMax.count == value.count {
-            return value > stringIntMax
+        } else if stringIntMax.count == self.string.count {
+            return self.string > stringIntMax
         } else {
             return true
         }
