@@ -32,6 +32,20 @@ final class BigIntTests: XCTestCase {
         XCTAssertEqual("0", BigInt(string: "100").subtract(BigInt(string: "100")).string)
         XCTAssertEqual("-100", BigInt(string: "0").subtract(BigInt(string: "100")).string)
         XCTAssertEqual("10", BigInt(string: "110").subtract(BigInt(string: "100")).string)
+        XCTAssertEqual(
+            "99384938938749832748236481274912903781290381203812093812093892108309218391208312",
+            BigInt(string: "99388628287564574658559713462294177594028508522049222183377604945437589674921151")
+                .subtract(
+                    BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712839")
+                ).string
+        )
+        XCTAssertEqual(
+            "-99384938938749832748236481274912903781290381203812093812093892108309218391208312",
+            BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712839")
+                .subtract(
+                    BigInt(string: "99388628287564574658559713462294177594028508522049222183377604945437589674921151")
+                ).string
+        )
     }
 
     func testAbs() {
