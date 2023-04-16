@@ -25,7 +25,7 @@ final class BigIntTests: XCTestCase {
             )
             .add(
                 BigInt(string: "99384938938749832748236481274912903781290381203812093812093892108309218391208312")).string
-            )
+        )
     }
 
     func testSubtraction() {
@@ -53,7 +53,7 @@ final class BigIntTests: XCTestCase {
         XCTAssertEqual(BigInt(string: "100"), BigInt(string: "100").abs)
     }
 
-    func testMultiplyNumberStrings() {
+    func testMultiplications() {
         XCTAssertEqual("12", BigInt(string: "1").multiply(by: BigInt(string: "12")).string)
         XCTAssertEqual("25", BigInt(string: "5").multiply(by: BigInt(string: "5")).string)
         XCTAssertEqual("1100", BigInt(string: "10").multiply(by: BigInt(string: "110")).string)
@@ -69,6 +69,30 @@ final class BigIntTests: XCTestCase {
             ).multiply(
                 by: BigInt(string: "99384938938749832748236481274912903781290381203812093812093892108309218391208312")
             ).string
+        )
+    }
+
+    func testDivision() {
+        XCTAssertEqual("1", BigInt(string: "2").divide(by: BigInt(string: "2")).string)
+        XCTAssertEqual("0", BigInt(string: "2").divide(by: BigInt(string: "3")).string)
+        XCTAssertEqual("5", BigInt(string: "10").divide(by: BigInt(string: "2")).string)
+        XCTAssertEqual("234", BigInt(string: "468").divide(by: BigInt(string: "2")).string)
+        XCTAssertEqual("13", BigInt(string: "468").divide(by: BigInt(string: "36")).string)
+        XCTAssertEqual("15", BigInt(string: "468").divide(by: BigInt(string: "30")).string)
+        XCTAssertEqual("102", BigInt(string: "55080").divide(by: BigInt(string: "540")).string)
+
+        XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
+            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856419")).string)
+        XCTAssertEqual("1", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
+            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856420")).string)
+        XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
+            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856400")).string)
+        XCTAssertEqual(
+            "1844674407370955161616093690636906369063659118564185641856418564185641856419",
+            BigInt(string: "6805647338418769269386242625587551214232448169147075892837021281507840117047172611791093817465194801958393915682474202972326638755542446973385223007122")
+                .divide(
+                    by: BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
+                ).string
         )
     }
 

@@ -118,26 +118,72 @@ struct BigInt {
 
         return BigInt(string: totalAcc)
     }
-    
-    //    static func division(lhs: String, rhs: String) -> String {
-    //        guard BigInt.isOverflownInteger(lhs) else {
-    //            if BigInt.isOverflownInteger(rhs) {
-    //                return "0"
-    //            } else {
-    //                return String(Int(lhs)! / Int(rhs)!)
-    //            }
-    //        }
-    //
-    //        var start = 0
-    //        var end = 0
-    //        let arrayLhs = Array(lhs)
-    //
-    //        while true {
-    //            if String(Array(arrayLhs[start...end]))
-    //        }
-    //
-    //        return ""
-    //    }
+
+    func divide(by value: BigInt) -> BigInt {
+        func share(divisible: BigInt, divisor: BigInt) -> Int? {
+            for x in 1...10 {
+                if BigInt(int: x).multiply(by: divisor) >= divisible {
+                    return x - 1
+                }
+            }
+
+            return nil
+        }
+        guard value != BigInt(int: 0) else { fatalError("Zero division") }
+        guard self != value else { return BigInt(int: 1) }
+        guard value < self else { return BigInt(int: 0) }
+
+        var start = 0
+        var length = 1
+        let selfStringArray = Array(self.string)
+        var acc = ""
+        var remainder = ""
+        var moveCounter = 0
+
+        while start + length <= self.string.count {
+            let substring = remainder + String(selfStringArray[start..<start + length])
+            let bigIntSubstring = BigInt(string: substring)
+            if bigIntSubstring.isOverflownInteger {
+                if bigIntSubstring >= value {
+                    moveCounter = 0
+                    var digit = share(divisible: bigIntSubstring, divisor: value)!
+                    let diff = bigIntSubstring.subtract(BigInt(int: digit).multiply(by: value))
+                    remainder = diff.string
+                    if diff == value {
+                        digit += 1
+                        remainder = ""
+                    }
+                    acc.append("\(digit)")
+                    start = start + length
+                    length = 1
+                } else {
+                    moveCounter += 1
+                    length += 1
+                    if !remainder.isEmpty && moveCounter >= 1 {
+                        acc.append("0")
+                    }
+                }
+            } else {
+                if value > bigIntSubstring {
+                    length += 1
+                    moveCounter += 1
+                    if !remainder.isEmpty && moveCounter >= 1 {
+                        acc.append("0")
+                    }
+                } else {
+                    moveCounter = 0
+                    // perform division
+                    let v = Int(substring)! / Int(value.string)!
+                    acc.append("\(v)")
+                    remainder = "\(Int(substring)! % Int(value.string)!)"
+                    start = start + length
+                    length = 1
+                }
+            }
+        }
+
+        return BigInt(string: acc)
+    }
     
     static func factorial(of n: Int) -> BigInt {
         guard n >= 2 else { return BigInt(string: "1") }
@@ -186,4 +232,9 @@ extension BigInt: Comparable {
     static func max(_ lhs: BigInt, _ rhs: BigInt) -> BigInt {
         lhs > rhs ? lhs : rhs
     }
+}
+
+// MARK: - CustomStringConvertible
+extension BigInt: CustomStringConvertible {
+    var description: String { self.string }
 }
