@@ -11,87 +11,102 @@ import XCTest
 @testable import DataStructures
 
 final class BigIntTests: XCTestCase {
+    func testFailableInit() {
+        XCTAssertEqual("-1", BigInt(string: "-1")!.string)
+        XCTAssertNil(BigInt(string: "-fd"))
+        XCTAssertNil(BigInt(string: "@43"))
+        XCTAssertEqual("0", BigInt(string: "-0")!.string)
+        XCTAssertEqual("123", BigInt(string: "00000123")!.string)
+        XCTAssertEqual("-123", BigInt(string: "-00000123")!.string)
+        XCTAssertEqual("-123", BigInt(string: "-00000123")!.string)
+        XCTAssertNil(BigInt(string: "0000---123"))
+        XCTAssertNil(BigInt(string: "---123"))
+        XCTAssertNil(BigInt(string: "0000-123"))
+    }
+
     func testAddition() {
-        XCTAssertEqual("13", BigInt(string: "1").add(BigInt(string: "12")).string)
-        XCTAssertEqual("13", BigInt(string: "12").add(BigInt(string: "1")).string)
-        XCTAssertEqual("10", BigInt(string: "5").add(BigInt(string: "5")).string)
-        XCTAssertEqual("120", BigInt(string: "10").add(BigInt(string: "110")).string)
-        XCTAssertEqual("36893488147419103232", BigInt(string: "18446744073709551616").add(BigInt(string: "18446744073709551616")).string)
+        XCTAssertEqual("13", BigInt(string: "1")!.add(BigInt(string: "12")!).string)
+        XCTAssertEqual("13", BigInt(string: "12")!.add(BigInt(string: "1")!).string)
+        XCTAssertEqual("10", BigInt(string: "5")!.add(BigInt(string: "5")!).string)
+        XCTAssertEqual("120", BigInt(string: "10")!.add(BigInt(string: "110")!).string)
+        XCTAssertEqual("36893488147419103232", BigInt(string: "18446744073709551616")!.add(BigInt(string: "18446744073709551616")!).string)
 
         XCTAssertEqual(
             "99388628287564574658559713462294177594028508522049222183377604945437589674921151",
             BigInt(
                 string: "3689348814741910323232187381273812738127318237128371283712837128371283712839"
-            )
+            )!
             .add(
-                BigInt(string: "99384938938749832748236481274912903781290381203812093812093892108309218391208312")).string
+                BigInt(string: "99384938938749832748236481274912903781290381203812093812093892108309218391208312")!).string
         )
     }
 
     func testSubtraction() {
-        XCTAssertEqual("0", BigInt(string: "100").subtract(BigInt(string: "100")).string)
-        XCTAssertEqual("-100", BigInt(string: "0").subtract(BigInt(string: "100")).string)
-        XCTAssertEqual("10", BigInt(string: "110").subtract(BigInt(string: "100")).string)
+        XCTAssertEqual("0", BigInt(string: "100")!.subtract(BigInt(string: "100")!).string)
+        XCTAssertEqual("-100", BigInt(string: "0")!.subtract(BigInt(string: "100")!).string)
+        XCTAssertEqual("10", BigInt(string: "110")!.subtract(BigInt(string: "100")!).string)
         XCTAssertEqual(
             "99384938938749832748236481274912903781290381203812093812093892108309218391208312",
-            BigInt(string: "99388628287564574658559713462294177594028508522049222183377604945437589674921151")
+            BigInt(string: "99388628287564574658559713462294177594028508522049222183377604945437589674921151")!
                 .subtract(
-                    BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712839")
+                    BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712839")!
                 ).string
         )
         XCTAssertEqual(
             "-99384938938749832748236481274912903781290381203812093812093892108309218391208312",
-            BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712839")
+            BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712839")!
                 .subtract(
-                    BigInt(string: "99388628287564574658559713462294177594028508522049222183377604945437589674921151")
+                    BigInt(string: "99388628287564574658559713462294177594028508522049222183377604945437589674921151")!
                 ).string
         )
     }
 
     func testAbs() {
-        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "-100").abs)
-        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "100").abs)
+        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "-100").orZero.abs)
+        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "100").orZero.abs)
     }
 
     func testMultiplications() {
-        XCTAssertEqual("12", BigInt(string: "1").multiply(by: BigInt(string: "12")).string)
-        XCTAssertEqual("25", BigInt(string: "5").multiply(by: BigInt(string: "5")).string)
-        XCTAssertEqual("1100", BigInt(string: "10").multiply(by: BigInt(string: "110")).string)
+        XCTAssertEqual("12", BigInt(string: "1")!.multiply(by: BigInt(string: "12")!).string)
+        XCTAssertEqual("25", BigInt(string: "5")!.multiply(by: BigInt(string: "5")!).string)
+        XCTAssertEqual("1100", BigInt(string: "10")!.multiply(by: BigInt(string: "110")!).string)
         XCTAssertEqual(
             "340282366920938463463374607431768211456",
-            BigInt(string: "18446744073709551616").multiply(by: BigInt(string: "18446744073709551616")).string
+            BigInt(string: "18446744073709551616")!.multiply(by: BigInt(string: "18446744073709551616")!).string
         )
         
         XCTAssertEqual(
             "366665706676873826264863717123819340361290349705643824284510724943347649088950282263745334756929992275939422380330698197066356568465337702785860474837917768",
             BigInt(
                 string: "3689348814741910323232187381273812738127318237128371283712837128371283712839"
-            ).multiply(
-                by: BigInt(string: "99384938938749832748236481274912903781290381203812093812093892108309218391208312")
+            )!.multiply(
+                by: BigInt(string: "99384938938749832748236481274912903781290381203812093812093892108309218391208312")!
             ).string
         )
     }
 
     func testDivision() {
-        XCTAssertEqual("1", BigInt(string: "2").divide(by: BigInt(string: "2")).string)
-        XCTAssertEqual("0", BigInt(string: "2").divide(by: BigInt(string: "3")).string)
-        XCTAssertEqual("5", BigInt(string: "10").divide(by: BigInt(string: "2")).string)
-        XCTAssertEqual("234", BigInt(string: "468").divide(by: BigInt(string: "2")).string)
-        XCTAssertEqual("13", BigInt(string: "468").divide(by: BigInt(string: "36")).string)
-        XCTAssertEqual("15", BigInt(string: "468").divide(by: BigInt(string: "30")).string)
-        XCTAssertEqual("102", BigInt(string: "55080").divide(by: BigInt(string: "540")).string)
+        XCTAssertEqual("1", BigInt(string: "2")!.divide(by: BigInt(string: "2")!).string)
+        XCTAssertEqual("0", BigInt(string: "2")!.divide(by: BigInt(string: "3")!).string)
+        XCTAssertEqual("5", BigInt(string: "10")!.divide(by: BigInt(string: "2")!).string)
+        XCTAssertEqual("234", BigInt(string: "468")!.divide(by: BigInt(string: "2")!).string)
+        XCTAssertEqual("13", BigInt(string: "468")!.divide(by: BigInt(string: "36")!).string)
+        XCTAssertEqual("15", BigInt(string: "468")!.divide(by: BigInt(string: "30")!).string)
+        XCTAssertEqual("102", BigInt(string: "55080")!.divide(by: BigInt(string: "540")!).string)
+        XCTAssertEqual("1002", BigInt(string: "533064")!.divide(by: BigInt(string: "532")!).string)
 
-        XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
-            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856419")).string)
-        XCTAssertEqual("1", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
-            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856420")).string)
-        XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
-            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856400")).string)
+
+        XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")!
+            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856419")!).string)
+        XCTAssertEqual("1", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")!
+            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856420")!).string)
+        XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")!
+            .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856400")!).string)
         XCTAssertEqual(
             "1844674407370955161616093690636906369063659118564185641856418564185641856419",
-            BigInt(string: "6805647338418769269386242625587551214232448169147075892837021281507840117047172611791093817465194801958393915682474202972326638755542446973385223007122")
+            BigInt(string: "6805647338418769269386242625587551214232448169147075892837021281507840117047172611791093817465194801958393915682474202972326638755542446973385223007122")!
                 .divide(
-                    by: BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")
+                    by: BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")!
                 ).string
         )
     }
@@ -131,11 +146,11 @@ final class BigIntTests: XCTestCase {
     }
 
     func testIsOverflownInteger() {
-        XCTAssertFalse(BigInt(string: "1").isOverflownInteger)
-        XCTAssertFalse(BigInt(string: "\(Int.max)").isOverflownInteger)
-        XCTAssertTrue(BigInt(string: "\(Int.max)1").isOverflownInteger)
-        XCTAssertFalse(BigInt(string: "0").isOverflownInteger)
-        XCTAssertFalse(BigInt(string: "-1").isOverflownInteger)
-        XCTAssertTrue(BigInt(string: String(Array(repeating: "9", count: String(Int.max).count))).isOverflownInteger)
+        XCTAssertFalse(BigInt(string: "1")!.isOverflownInteger)
+        XCTAssertFalse(BigInt(string: "\(Int.max)")!.isOverflownInteger)
+        XCTAssertTrue(BigInt(string: "\(Int.max)1")!.isOverflownInteger)
+        XCTAssertFalse(BigInt(string: "0")!.isOverflownInteger)
+        XCTAssertFalse(BigInt(string: "-1")!.isOverflownInteger)
+        XCTAssertTrue(BigInt(string: String(Array(repeating: "9", count: String(Int.max).count)))!.isOverflownInteger)
     }
 }

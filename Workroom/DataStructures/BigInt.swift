@@ -11,8 +11,24 @@ import Foundation
 struct BigInt {
     let string: String
 
-    init(string: String) {
-        self.string = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    init?(string: String) {
+        var stringWithoutSpaces = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        let digitsCharacters = Array("0123456789")
+        let isNegative = stringWithoutSpaces.first == "-"
+        stringWithoutSpaces = isNegative
+        ? String(stringWithoutSpaces.dropFirst())
+        : stringWithoutSpaces
+
+        for char in stringWithoutSpaces {
+            if stringWithoutSpaces.first == "0" {
+                stringWithoutSpaces = String(stringWithoutSpaces.dropFirst())
+            }
+            if !digitsCharacters.contains(char) {
+                return nil
+            }
+        }
+        self.string = (isNegative && !stringWithoutSpaces.isEmpty ? "-" : "")
+        + (stringWithoutSpaces.isEmpty ? "0" : stringWithoutSpaces)
     }
 
     init(int: Int) {
@@ -47,7 +63,7 @@ struct BigInt {
         ? acc
         : "\(movedToNext)" + acc
 
-        return BigInt(string: string)
+        return BigInt(string: string)!
     }
     
     func subtract(_ value: BigInt) -> BigInt {
@@ -93,7 +109,7 @@ struct BigInt {
             }
         }
 
-        return BigInt(string: "\(sign)\(String(Array(acc)[zeroesToSkip..<acc.count]))")
+        return BigInt(string: "\(sign)\(String(Array(acc)[zeroesToSkip..<acc.count]))")!
     }
     
     func multiply(by value: BigInt) -> BigInt {
@@ -113,10 +129,10 @@ struct BigInt {
             
             acc = movedToNext == 0 ? acc : "\(movedToNext)" + acc
             
-            totalAcc = BigInt(string: totalAcc).add(BigInt(string: acc)).string
+            totalAcc = BigInt(string: totalAcc)!.add(BigInt(string: acc)!).string
         }
 
-        return BigInt(string: totalAcc)
+        return BigInt(string: totalAcc)!
     }
 
     func divide(by value: BigInt) -> BigInt {
@@ -142,7 +158,7 @@ struct BigInt {
 
         while start + length <= self.string.count {
             let substring = remainder + String(selfStringArray[start..<start + length])
-            let bigIntSubstring = BigInt(string: substring)
+            let bigIntSubstring = BigInt(string: substring)!
             if bigIntSubstring.isOverflownInteger {
                 if bigIntSubstring >= value {
                     moveCounter = 0
@@ -182,17 +198,17 @@ struct BigInt {
             }
         }
 
-        return BigInt(string: acc)
+        return BigInt(string: acc)!
     }
     
     static func factorial(of n: Int) -> BigInt {
-        guard n >= 2 else { return BigInt(string: "1") }
+        guard n >= 2 else { return BigInt(string: "1")! }
         var acc = "1"
         for x in 2...n {
-            acc = BigInt(string: acc).multiply(by: BigInt(string: "\(x)")).string
+            acc = BigInt(string: acc)!.multiply(by: BigInt(string: "\(x)")!).string
         }
         
-        return BigInt(string: acc)
+        return BigInt(string: acc)!
     }
     
     var isOverflownInteger: Bool {
@@ -201,7 +217,7 @@ struct BigInt {
 
     var abs: BigInt {
         string.first == "-"
-        ? BigInt(string: String(string.dropFirst()))
+        ? BigInt(string: String(string.dropFirst()))!
         : self
     }
 }
@@ -237,4 +253,8 @@ extension BigInt: Comparable {
 // MARK: - CustomStringConvertible
 extension BigInt: CustomStringConvertible {
     var description: String { self.string }
+}
+
+extension Optional where Wrapped == BigInt {
+    var orZero: BigInt { self == nil ? BigInt(int: 0) : self! }
 }
