@@ -7,10 +7,9 @@
 
 import Foundation
 
-// TODO: Make it work for negative Integers
 struct BigInt {
     let string: String
-
+    
     init?(string: String) {
         var stringWithoutSpaces = string.trimmingCharacters(in: .whitespacesAndNewlines)
         let digitsCharacters = Array("0123456789")
@@ -18,7 +17,7 @@ struct BigInt {
         stringWithoutSpaces = isNegative
         ? String(stringWithoutSpaces.dropFirst())
         : stringWithoutSpaces
-
+        
         for char in stringWithoutSpaces {
             if stringWithoutSpaces.first == "0" {
                 stringWithoutSpaces = String(stringWithoutSpaces.dropFirst())
@@ -30,44 +29,60 @@ struct BigInt {
         self.string = (isNegative && !stringWithoutSpaces.isEmpty ? "-" : "")
         + (stringWithoutSpaces.isEmpty ? "0" : stringWithoutSpaces)
     }
-
+    
     init(int: Int) {
         self.string = "\(int)"
     }
-
+    
     func add(_ value: BigInt) -> BigInt {
         if self.string == "0" { return value }
         if value.string == "0" { return self }
         
-        var lhs = self.string
-        var rhs = value.string
-        
-        if lhs.count < rhs.count {
-            lhs = String(repeating: "0", count: rhs.count - lhs.count) + lhs
-        } else if lhs.count > rhs.count {
-            rhs = String(repeating: "0", count: lhs.count - rhs.count) + rhs
+        if (self.isNegative && value.isNegative) || (!self.isNegative && !value.isNegative) {
+            var lhs = self.abs.string
+            var rhs = value.abs.string
+            
+            if lhs.count < rhs.count {
+                lhs = String(repeating: "0", count: rhs.count - lhs.count) + lhs
+            } else if lhs.count > rhs.count {
+                rhs = String(repeating: "0", count: lhs.count - rhs.count) + rhs
+            }
+            
+            var movedToNext = 0
+            var acc = ""
+            for pair in zip(lhs.reversed(), rhs.reversed()) {
+                let lhsDigit = Int(String(pair.0))!
+                let rhsDigit = Int(String(pair.1))!
+                let sum = (lhsDigit + rhsDigit + movedToNext)
+                let lastDigit = sum % 10
+                movedToNext = sum / 10
+                acc = "\(lastDigit)" + acc
+            }
+            
+            let string = movedToNext == 0
+            ? acc
+            : "\(movedToNext)" + acc
+            
+            return (self.isNegative && value.isNegative)
+            ? BigInt(string: string)!.negate
+            : BigInt(string: string)!
+        } else {
+            return value > self
+            ? value.subtract(self.negate)
+            : self.subtract(value.negate)
         }
-        
-        var movedToNext = 0
-        var acc = ""
-        for pair in zip(lhs.reversed(), rhs.reversed()) {
-            let lhsDigit = Int(String(pair.0))!
-            let rhsDigit = Int(String(pair.1))!
-            let sum = (lhsDigit + rhsDigit + movedToNext)
-            let lastDigit = sum % 10
-            movedToNext = sum / 10
-            acc = "\(lastDigit)" + acc
-        }
-
-        let string = movedToNext == 0
-        ? acc
-        : "\(movedToNext)" + acc
-
-        return BigInt(string: string)!
     }
     
     func subtract(_ value: BigInt) -> BigInt {
         guard self != value else { return BigInt(int: 0) }
+        guard value != BigInt(int: 0) else { return self }
+
+        if !self.isNegative && value.isNegative {
+            return self.add(value.negate)
+        } else if self.isNegative && !value.isNegative {
+            return self.negate.add(value).negate
+        }
+
         let sign = self >= value
         ? ""
         : "-"
@@ -113,8 +128,8 @@ struct BigInt {
     }
     
     func multiply(by value: BigInt) -> BigInt {
-        let lhs = Array(String(self.string.reversed()))
-        let rhs = Array(String(value.string.reversed()))
+        let lhs = Array(String(self.abs.string.reversed()))
+        let rhs = Array(String(value.abs.string.reversed()))
         
         var totalAcc = "0"
         for (index, l) in lhs.enumerated() {
@@ -132,7 +147,9 @@ struct BigInt {
             totalAcc = BigInt(string: totalAcc)!.add(BigInt(string: acc)!).string
         }
 
-        return BigInt(string: totalAcc)!
+        return (self.isNegative && value.isNegative) || (!self.isNegative && !value.isNegative)
+        ? BigInt(string: totalAcc)!
+        : BigInt(string: totalAcc)!.negate
     }
 
     func divide(by value: BigInt) -> BigInt {
@@ -147,25 +164,26 @@ struct BigInt {
         }
         guard value != BigInt(int: 0) else { fatalError("Zero division") }
         guard self != value else { return BigInt(int: 1) }
-        guard value < self else { return BigInt(int: 0) }
+        guard value.abs < self.abs else { return BigInt(int: 0) }
 
+        let absString = self.abs.string
         var start = 0
         var length = 1
-        let selfStringArray = Array(self.string)
+        let selfStringArray = Array(absString)
         var acc = ""
         var remainder = ""
         var moveCounter = 0
 
-        while start + length <= self.string.count {
+        while start + length <= absString.count {
             let substring = remainder + String(selfStringArray[start..<start + length])
             let bigIntSubstring = BigInt(string: substring)!
             if bigIntSubstring.isOverflownInteger {
-                if bigIntSubstring >= value {
+                if bigIntSubstring >= value.abs {
                     moveCounter = 0
-                    var digit = share(divisible: bigIntSubstring, divisor: value)!
-                    let diff = bigIntSubstring.subtract(BigInt(int: digit).multiply(by: value))
+                    var digit = share(divisible: bigIntSubstring, divisor: value.abs)!
+                    let diff = bigIntSubstring.subtract(BigInt(int: digit).multiply(by: value.abs))
                     remainder = diff.string
-                    if diff == value {
+                    if diff == value.abs {
                         digit += 1
                         remainder = ""
                     }
@@ -180,7 +198,7 @@ struct BigInt {
                     }
                 }
             } else {
-                if value > bigIntSubstring {
+                if value.abs > bigIntSubstring {
                     length += 1
                     moveCounter += 1
                     if !remainder.isEmpty && moveCounter >= 1 {
@@ -189,16 +207,18 @@ struct BigInt {
                 } else {
                     moveCounter = 0
                     // perform division
-                    let v = Int(substring)! / Int(value.string)!
+                    let v = Int(substring)! / Int(value.abs.string)!
                     acc.append("\(v)")
-                    remainder = "\(Int(substring)! % Int(value.string)!)"
+                    remainder = "\(Int(substring)! % Int(value.abs.string)!)"
                     start = start + length
                     length = 1
                 }
             }
         }
 
-        return BigInt(string: acc)!
+        return  (self.isNegative && value.isNegative) || (!self.isNegative && !value.isNegative)
+        ? BigInt(string: acc)!
+        : BigInt(string: acc)!.negate
     }
     
     static func factorial(of n: Int) -> BigInt {
@@ -216,9 +236,19 @@ struct BigInt {
     }
 
     var abs: BigInt {
-        string.first == "-"
+        self.isNegative
         ? BigInt(string: String(string.dropFirst()))!
         : self
+    }
+
+    var negate: BigInt {
+        self.isNegative
+        ? BigInt(string: String(string.dropFirst()))!
+        : BigInt(string: "-" + string)!
+    }
+
+    var isNegative: Bool {
+        string.first == "-"
     }
 }
 
@@ -232,12 +262,18 @@ extension BigInt: Equatable {
 // MARK: - Comparable
 extension BigInt: Comparable {
     static func < (lhs: Self, rhs: Self) -> Bool {
-        if lhs.string.count < rhs.string.count  {
+        if lhs.isNegative && !rhs.isNegative {
             return true
-        } else if lhs.string.count == rhs.string.count {
-            return lhs.string < rhs.string
-        } else {
+        } else if !lhs.isNegative && rhs.isNegative {
             return false
+        } else {
+            if lhs.string.count < rhs.string.count  {
+                return lhs.isNegative ? false : true
+            } else if lhs.string.count == rhs.string.count {
+                return lhs.isNegative ? lhs.string > rhs.string : lhs.string < rhs.string
+            } else {
+                return lhs.isNegative ? true : false
+            }
         }
     }
 

@@ -41,6 +41,13 @@ final class BigIntTests: XCTestCase {
         )
     }
 
+    func testNegativeAddition() {
+        XCTAssertEqual("11", BigInt(string: "-1")!.add(BigInt(string: "12")!).string)
+        XCTAssertEqual("-13", BigInt(string: "-12")!.add(BigInt(string: "-1")!).string)
+        XCTAssertEqual("13", BigInt(string: "12")!.add(BigInt(string: "1")!).string)
+        XCTAssertEqual("-11", BigInt(string: "-12")!.add(BigInt(string: "1")!).string)
+    }
+
     func testSubtraction() {
         XCTAssertEqual("0", BigInt(string: "100")!.subtract(BigInt(string: "100")!).string)
         XCTAssertEqual("-100", BigInt(string: "0")!.subtract(BigInt(string: "100")!).string)
@@ -61,12 +68,37 @@ final class BigIntTests: XCTestCase {
         )
     }
 
+    func testNegativeSubtraction() {
+        XCTAssertEqual("5", BigInt(string: "10")!.subtract(BigInt(string: "5")!).string)
+        XCTAssertEqual("-5", BigInt(string: "5")!.subtract(BigInt(string: "10")!).string)
+
+        XCTAssertEqual("-15", BigInt(string: "-10")!.subtract(BigInt(string: "5")!).string)
+        XCTAssertEqual("15", BigInt(string: "5")!.subtract(BigInt(string: "-10")!).string)
+
+        XCTAssertEqual("-5", BigInt(string: "-10")!.subtract(BigInt(string: "-5")!).string)
+        XCTAssertEqual("5", BigInt(string: "-5")!.subtract(BigInt(string: "-10")!).string)
+
+        XCTAssertEqual("15", BigInt(string: "10")!.subtract(BigInt(string: "-5")!).string)
+        XCTAssertEqual("-15", BigInt(string: "-5")!.subtract(BigInt(string: "10")!).string)
+
+    }
+
     func testAbs() {
         XCTAssertEqual(BigInt(string: "100"), BigInt(string: "-100").orZero.abs)
         XCTAssertEqual(BigInt(string: "100"), BigInt(string: "100").orZero.abs)
     }
 
-    func testMultiplications() {
+    func testNegate() {
+        XCTAssertEqual(BigInt(string: "100"), BigInt(string: "-100").orZero.negate)
+        XCTAssertEqual(BigInt(string: "-100"), BigInt(string: "100").orZero.negate)
+    }
+
+    func testIsNegative() {
+        XCTAssertTrue(BigInt(string: "-100").orZero.isNegative)
+        XCTAssertFalse(BigInt(string: "100").orZero.isNegative)
+    }
+
+    func testMultiplication() {
         XCTAssertEqual("12", BigInt(string: "1")!.multiply(by: BigInt(string: "12")!).string)
         XCTAssertEqual("25", BigInt(string: "5")!.multiply(by: BigInt(string: "5")!).string)
         XCTAssertEqual("1100", BigInt(string: "10")!.multiply(by: BigInt(string: "110")!).string)
@@ -85,6 +117,13 @@ final class BigIntTests: XCTestCase {
         )
     }
 
+    func testNegativeMultiplication() {
+        XCTAssertEqual("-24", BigInt(string: "2")!.multiply(by: BigInt(string: "-12")!).string)
+        XCTAssertEqual("-24", BigInt(string: "-2")!.multiply(by: BigInt(string: "12")!).string)
+        XCTAssertEqual("24", BigInt(string: "2")!.multiply(by: BigInt(string: "12")!).string)
+        XCTAssertEqual("24", BigInt(string: "-2")!.multiply(by: BigInt(string: "-12")!).string)
+    }
+
     func testDivision() {
         XCTAssertEqual("1", BigInt(string: "2")!.divide(by: BigInt(string: "2")!).string)
         XCTAssertEqual("0", BigInt(string: "2")!.divide(by: BigInt(string: "3")!).string)
@@ -94,7 +133,6 @@ final class BigIntTests: XCTestCase {
         XCTAssertEqual("15", BigInt(string: "468")!.divide(by: BigInt(string: "30")!).string)
         XCTAssertEqual("102", BigInt(string: "55080")!.divide(by: BigInt(string: "540")!).string)
         XCTAssertEqual("1002", BigInt(string: "533064")!.divide(by: BigInt(string: "532")!).string)
-
 
         XCTAssertEqual("2", BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")!
             .divide(by: BigInt(string: "1844674407370955161616093690636906369063659118564185641856418564185641856419")!).string)
@@ -109,6 +147,13 @@ final class BigIntTests: XCTestCase {
                     by: BigInt(string: "3689348814741910323232187381273812738127318237128371283712837128371283712838")!
                 ).string
         )
+    }
+
+    func testNegativeDivision() {
+        XCTAssertEqual("-234", BigInt(string: "-468")!.divide(by: BigInt(string: "2")!).string)
+        XCTAssertEqual("-234", BigInt(string: "468")!.divide(by: BigInt(string: "-2")!).string)
+        XCTAssertEqual("234", BigInt(string: "468")!.divide(by: BigInt(string: "2")!).string)
+        XCTAssertEqual("234", BigInt(string: "-468")!.divide(by: BigInt(string: "-2")!).string)
     }
 
     func testFactorial() {
