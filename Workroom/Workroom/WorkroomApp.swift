@@ -9,6 +9,7 @@ import SwiftUI
 import ReactivePattern
 import DataStructures
 import Architecture
+import Algorithms
 
 @main
 struct WorkroomApp: App {

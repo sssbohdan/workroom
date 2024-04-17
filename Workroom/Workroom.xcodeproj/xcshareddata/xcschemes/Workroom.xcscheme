@@ -62,6 +62,17 @@
                ReferencedContainer = "container:Workroom.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D0A1F452B878A8000B47159"
+               BuildableName = "AlgorithmsTests.xctest"
+               BlueprintName = "AlgorithmsTests"
+               ReferencedContainer = "container:Workroom.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
