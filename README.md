@@ -8,4 +8,4 @@ So far here you can find:
 * Reactive pattern
 * BigInt
 * Matrix
-
+* Throttle & Debounce
