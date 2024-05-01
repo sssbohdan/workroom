@@ -29,3 +29,18 @@ public func throttle<T>(_ f: @escaping (T) -> Void, timeInterval: DispatchTimeIn
             execute: workItem!)
     }
 }
+
+
+//
+//public func throttle<each Element>(_ f: @escaping (repeat each Element) -> Void, timeInterval: DispatchTimeInterval) -> (repeat each Element) -> Void {
+//    var workItem: DispatchWorkItem?
+//    return { elements in
+//        workItem?.cancel()
+//        workItem = DispatchWorkItem { f(elements) }
+//        DispatchQueue.main.asyncAfter(
+//            deadline: .now().advanced(by: timeInterval),
+//            execute: workItem!)
+//    }
+//}
+//
+//

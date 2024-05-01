@@ -7,20 +7,20 @@
 
 import Foundation
 
-protocol PublishableProtocol {
+protocol Publishable {
     associatedtype Value
 
     func send(event: Event<Value>)
 }
 
-final class Publishable<T>: PublishableProtocol, ObservableProtocol {
-    private lazy var subsribers = [EquatableEventClosure<T>]()
+final class Publisher<T>: Publishable, Observable {
+    private lazy var subscribers = [EquatableEventClosure<T>]()
 
     func observe(with onEvent: @escaping (Event<T>) -> Void) -> Disposable {
         let equatableClosure = EquatableEventClosure(onEvent)
-        self.subsribers.append(equatableClosure)
+        self.subscribers.append(equatableClosure)
         let blockDisposable = BlockDisposable { [weak self] in
-            self?.subsribers.removeAll(where: {
+            self?.subscribers.removeAll(where: {
                 $0 == equatableClosure
             })
         }
@@ -29,10 +29,10 @@ final class Publishable<T>: PublishableProtocol, ObservableProtocol {
     }
 
     func send(event: Event<T>) {
-        self.subsribers.forEach { $0.closure(event) }
+        self.subscribers.forEach { $0.closure(event) }
     }
 
     func sendNext(_ value: T) {
-        self.subsribers.forEach { $0.closure(.next(value)) }
+        self.subscribers.forEach { $0.closure(.next(value)) }
     }
 }

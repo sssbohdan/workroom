@@ -7,9 +7,9 @@
 
 import Foundation
 
-extension ObservableProtocol {
-    func map<NewType>(_ f: @escaping (Value) -> NewType) -> Observable<NewType> {
-        return Observable { producer in
+extension Observable {
+    func map<NewType>(_ f: @escaping (Value) -> NewType) -> ObservableSequence<NewType> {
+        return ObservableSequence { producer in
             return self.observe { event in
                 producer(event.map(f))
             }

@@ -12,6 +12,7 @@ enum Event<T> {
     case failure(NSError)
     case completed
 
+    @discardableResult
     func map<K>(_ f: (T) -> K) -> Event<K> {
         switch self {
         case .next(let value):

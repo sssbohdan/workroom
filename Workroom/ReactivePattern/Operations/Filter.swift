@@ -7,9 +7,9 @@
 
 import Foundation
 
-extension ObservableProtocol {
-    func filter(_ f: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable { producer in
+extension Observable {
+    func filter(_ f: @escaping (Value) -> Bool) -> ObservableSequence<Value> {
+        return ObservableSequence { producer in
             return self.observe { event in
                 switch event {
                 case .next(let value):

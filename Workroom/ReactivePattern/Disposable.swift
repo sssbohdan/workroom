@@ -28,12 +28,20 @@ final class BlockDisposable: Disposable {
     }
 }
 
-final class DisposeBag {
+final class DisposeBag: Disposable {
     fileprivate var disposables = [Disposable]()
 
-    deinit {
+    func add(_ disposable: Disposable) {
+        self.disposables.append(disposable)
+    }
+
+    func dispose() {
         self.disposables.forEach { $0.dispose() }
         self.disposables = []
+    }
+
+    deinit {
+        self.dispose()
     }
 }
 
