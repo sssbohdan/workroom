@@ -51,12 +51,16 @@ final class DI: DIProtocol {
     self.register(object, id: string, scope: scope)
   }
   
-  func register<Element, Param1, Param2, Param3>(object:  @escaping (Param1, Param2, Param3) -> Element, in scope: DIScope) {
+  func register<Element, Param1, Param2, Param3>(object: @escaping (Param1, Param2, Param3) -> Element, in scope: DIScope) {
     let string = String(reflecting: Element.self)
     self.register(object, id: string, scope: scope)
-
   }
-  
+
+//    func register<Element, each Param>(object: @escaping (repeat each Param) -> Element, in scope: DIScope) {
+//        let string = String(reflecting: Element.self)
+//        self.register(object, id: string, scope: scope)
+//    }
+
   private func register(_ obj: Any, id: String, scope: DIScope) {
     self.scopes[id] = scope
     self.functions[id] = obj

@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+/// Returns function that will call parameter function `f` only if `timeInterval` passed without receiving another invokation of that function.
 public func throttle(_ f: @escaping () -> Void, timeInterval: DispatchTimeInterval) -> () -> Void {
     var workItem: DispatchWorkItem?
     return {

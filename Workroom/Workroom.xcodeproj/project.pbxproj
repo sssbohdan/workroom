@@ -39,6 +39,8 @@
 		8D42176B2916F35500D9C2E0 /* DITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176A2916F35500D9C2E0 /* DITests.swift */; };
 		8D42176D2916F3FE00D9C2E0 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176C2916F3FE00D9C2E0 /* BigInt.swift */; };
 		8D4217712916F5CB00D9C2E0 /* BigIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176F2916F5CB00D9C2E0 /* BigIntTests.swift */; };
+		8D4852A32C319D17003EC64F /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4852A22C319D17003EC64F /* Debounce.swift */; };
+		8D4852A52C31AC20003EC64F /* DebounceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4852A42C31AC20003EC64F /* DebounceTests.swift */; };
 		8D5F44832BE28050000CC775 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F44822BE28050000CC775 /* Combine.swift */; };
 		8D5F44852BE2859D000CC775 /* CombineLatestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F44842BE2859D000CC775 /* CombineLatestTests.swift */; };
 		8D65C4B929474C5900E5BFEB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65C4B829474C5900E5BFEB /* Queue.swift */; };
@@ -185,6 +187,8 @@
 		8D42176A2916F35500D9C2E0 /* DITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DITests.swift; sourceTree = "<group>"; };
 		8D42176C2916F3FE00D9C2E0 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
 		8D42176F2916F5CB00D9C2E0 /* BigIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntTests.swift; sourceTree = "<group>"; };
+		8D4852A22C319D17003EC64F /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
+		8D4852A42C31AC20003EC64F /* DebounceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebounceTests.swift; sourceTree = "<group>"; };
 		8D5F44822BE28050000CC775 /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		8D5F44842BE2859D000CC775 /* CombineLatestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineLatestTests.swift; sourceTree = "<group>"; };
 		8D65C4B829474C5900E5BFEB /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 				8D65C4B829474C5900E5BFEB /* Queue.swift */,
 				8D65C4BC2947522800E5BFEB /* Stack.swift */,
 				8DB5D3692BD01DD600CD5989 /* Throttle.swift */,
+				8D4852A22C319D17003EC64F /* Debounce.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 				8D42176F2916F5CB00D9C2E0 /* BigIntTests.swift */,
 				8D4217422916F21D00D9C2E0 /* MatrixTests.swift */,
 				8DB5D36B2BD0208600CD5989 /* ThrottleTests.swift */,
+				8D4852A42C31AC20003EC64F /* DebounceTests.swift */,
 			);
 			path = DataStructuresTests;
 			sourceTree = "<group>";
@@ -820,6 +826,7 @@
 				8D4217412916F21000D9C2E0 /* Matrix.swift in Sources */,
 				8D65C4B929474C5900E5BFEB /* Queue.swift in Sources */,
 				8DB5D36A2BD01DD600CD5989 /* Throttle.swift in Sources */,
+				8D4852A32C319D17003EC64F /* Debounce.swift in Sources */,
 				8D42176D2916F3FE00D9C2E0 /* BigInt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -830,6 +837,7 @@
 			files = (
 				8DB5D36C2BD0208600CD5989 /* ThrottleTests.swift in Sources */,
 				8D4217432916F21D00D9C2E0 /* MatrixTests.swift in Sources */,
+				8D4852A52C31AC20003EC64F /* DebounceTests.swift in Sources */,
 				8D4217712916F5CB00D9C2E0 /* BigIntTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1096,6 +1104,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1149,6 +1158,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1178,7 +1188,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bbb.Workroom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1208,7 +1217,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bbb.Workroom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
