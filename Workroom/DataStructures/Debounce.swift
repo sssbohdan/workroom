@@ -9,33 +9,37 @@ import Foundation
 
 /// Returns function that will call parameter function `f` no more than once during `timeInterval`
 func debounce(timeInterval: DispatchTimeInterval, _ f: @escaping () -> Void) -> (() -> Void) {
-    var lastCall: TimeInterval? // FIXME: Use more precise API
+    var lastCall: DispatchTime?
     return {
         if let unwrappedLastCall = lastCall {
-            let diff = (Date().timeIntervalSinceReferenceDate - unwrappedLastCall)
-            
+            let diff = (DispatchTime.now().uptimeNanoseconds - unwrappedLastCall.uptimeNanoseconds)
+//            print("debug:: diff \(diff)")// NOLINT no_nslog_swift
             switch timeInterval {
             case .milliseconds(let milliseconds):
-                if diff >= Double(milliseconds) / 1000 {
+                if Double(diff) >= Double(milliseconds) * 1_000_000 {
                     f()
-                    lastCall = Date().timeIntervalSinceReferenceDate
+                    lastCall = DispatchTime.now()
+//                    print("debug:: lastCall \(lastCall)")// NOLINT no_nslog_swift
                 }
                 
             case .seconds(let seconds):
-                if diff >= Double(seconds) {
+                if Double(diff) >= Double(seconds) * 1_000_000_000 {
                     f()
-                    lastCall = Date().timeIntervalSinceReferenceDate
+                    lastCall = DispatchTime.now()
+//                    print("debug:: lastCall \(lastCall)")// NOLINT no_nslog_swift
                 }
             case .nanoseconds(let nanoseconds):
-                if diff >= Double(nanoseconds) / 1_000_000_000 {
+                if diff >= nanoseconds {
                     f()
-                    lastCall = Date().timeIntervalSinceReferenceDate
+                    lastCall = DispatchTime.now()
+//                    print("debug:: lastCall \(lastCall)")// NOLINT no_nslog_swift
                 }
-                
+
             case .microseconds(let microseconds):
-                if diff >= Double(microseconds) / 1_000_000 {
+                if Double(diff) >= Double(microseconds) * 1_000 {
                     f()
-                    lastCall = Date().timeIntervalSinceReferenceDate
+                    lastCall = DispatchTime.now()
+//                    print("debug:: lastCall \(lastCall)")// NOLINT no_nslog_swift
                 }
             case .never:
                 break
@@ -44,7 +48,8 @@ func debounce(timeInterval: DispatchTimeInterval, _ f: @escaping () -> Void) -> 
             }
         } else {
             f()
-            lastCall = Date().timeIntervalSinceReferenceDate
+            lastCall = DispatchTime.now()
+//            print("debug:: lastCall \(lastCall)")// NOLINT no_nslog_swift
         }
     }
 }

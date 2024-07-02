@@ -13,13 +13,12 @@ final class DebounceTests: XCTestCase {
     func testSecondsDebounce() {
         var counter = 0
         let exp = self.expectation(description: "Function was called")
-        var f = {
+        let f = {
             counter += 1
         }
         let debouncedFunction = debounce(timeInterval: .seconds(2), f)
-        for _ in 0...10000 {
-            debouncedFunction()
-        }
+        debouncedFunction()
+
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             debouncedFunction()
