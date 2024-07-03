@@ -7,5 +7,5 @@ So far here you can find:
 * DI container
 * Reactive pattern
 * BigInt
-* Matrix, Queue, Stack
+* Matrix, Queue, Stack, List
 * Throttle & Debounce
