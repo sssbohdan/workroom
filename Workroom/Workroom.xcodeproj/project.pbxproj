@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D04A7602D0F592B00974873 /* BinaryTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D04A75F2D0F592B00974873 /* BinaryTreeTests.swift */; };
+		8D04A7622D0F6E5600974873 /* MD2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D04A7612D0F6E5600974873 /* MD2.swift */; };
 		8D0A1F472B878A8000B47159 /* Algorithms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0A1F3F2B878A7F00B47159 /* Algorithms.framework */; };
 		8D0A1F4E2B878A8000B47159 /* AlgorithmsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A1F4D2B878A8000B47159 /* AlgorithmsTests.swift */; };
 		8D0A1F4F2B878A8000B47159 /* Algorithms.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D0A1F412B878A7F00B47159 /* Algorithms.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +43,7 @@
 		8D4217712916F5CB00D9C2E0 /* BigIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D42176F2916F5CB00D9C2E0 /* BigIntTests.swift */; };
 		8D4852A32C319D17003EC64F /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4852A22C319D17003EC64F /* Debounce.swift */; };
 		8D4852A52C31AC20003EC64F /* DebounceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4852A42C31AC20003EC64F /* DebounceTests.swift */; };
+		8D50076A2D158B3300EECB35 /* MD2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5007692D158B3300EECB35 /* MD2Tests.swift */; };
 		8D5F44832BE28050000CC775 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F44822BE28050000CC775 /* Combine.swift */; };
 		8D5F44852BE2859D000CC775 /* CombineLatestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F44842BE2859D000CC775 /* CombineLatestTests.swift */; };
 		8D65C4B929474C5900E5BFEB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65C4B829474C5900E5BFEB /* Queue.swift */; };
@@ -161,6 +163,7 @@
 
 /* Begin PBXFileReference section */
 		8D04A75F2D0F592B00974873 /* BinaryTreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTreeTests.swift; sourceTree = "<group>"; };
+		8D04A7612D0F6E5600974873 /* MD2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD2.swift; sourceTree = "<group>"; };
 		8D0A1F3F2B878A7F00B47159 /* Algorithms.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Algorithms.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0A1F412B878A7F00B47159 /* Algorithms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Algorithms.h; sourceTree = "<group>"; };
 		8D0A1F462B878A8000B47159 /* AlgorithmsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlgorithmsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +195,7 @@
 		8D42176F2916F5CB00D9C2E0 /* BigIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntTests.swift; sourceTree = "<group>"; };
 		8D4852A22C319D17003EC64F /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		8D4852A42C31AC20003EC64F /* DebounceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebounceTests.swift; sourceTree = "<group>"; };
+		8D5007692D158B3300EECB35 /* MD2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD2Tests.swift; sourceTree = "<group>"; };
 		8D5F44822BE28050000CC775 /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		8D5F44842BE2859D000CC775 /* CombineLatestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineLatestTests.swift; sourceTree = "<group>"; };
 		8D65C4B829474C5900E5BFEB /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -284,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				8D0A1F412B878A7F00B47159 /* Algorithms.h */,
+				8D04A7612D0F6E5600974873 /* MD2.swift */,
 			);
 			path = Algorithms;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				8D0A1F4D2B878A8000B47159 /* AlgorithmsTests.swift */,
+				8D5007692D158B3300EECB35 /* MD2Tests.swift */,
 			);
 			path = AlgorithmsTests;
 			sourceTree = "<group>";
@@ -645,7 +651,7 @@
 				TargetAttributes = {
 					8D0A1F3E2B878A7F00B47159 = {
 						CreatedOnToolsVersion = 15.1;
-						LastSwiftMigration = 1510;
+						LastSwiftMigration = 1540;
 					};
 					8D0A1F452B878A8000B47159 = {
 						CreatedOnToolsVersion = 15.1;
@@ -779,6 +785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D04A7622D0F6E5600974873 /* MD2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0A1F4E2B878A8000B47159 /* AlgorithmsTests.swift in Sources */,
+				8D50076A2D158B3300EECB35 /* MD2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,6 +1021,7 @@
 		8D0A1F562B878A8000B47159 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1036,6 +1045,7 @@
 		8D0A1F572B878A8000B47159 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
