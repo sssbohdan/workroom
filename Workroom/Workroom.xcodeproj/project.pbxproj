@@ -49,6 +49,8 @@
 		8D65C4B929474C5900E5BFEB /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65C4B829474C5900E5BFEB /* Queue.swift */; };
 		8D65C4BD2947522800E5BFEB /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65C4BC2947522800E5BFEB /* Stack.swift */; };
 		8D903ED12CECD9D50028BC04 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D903ED02CECD9D50028BC04 /* BinaryTree.swift */; };
+		8D9548C52D50036E00EA18E9 /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9548C42D50036E00EA18E9 /* LRUCache.swift */; };
+		8D9548C72D500C8200EA18E9 /* LRUCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9548C62D500C8200EA18E9 /* LRUCacheTests.swift */; };
 		8DB5D36A2BD01DD600CD5989 /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB5D3692BD01DD600CD5989 /* Throttle.swift */; };
 		8DB5D36C2BD0208600CD5989 /* ThrottleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB5D36B2BD0208600CD5989 /* ThrottleTests.swift */; };
 		8DB63E162918436600B70F17 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB63E152918436600B70F17 /* Map.swift */; };
@@ -201,6 +203,8 @@
 		8D65C4B829474C5900E5BFEB /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		8D65C4BC2947522800E5BFEB /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		8D903ED02CECD9D50028BC04 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
+		8D9548C42D50036E00EA18E9 /* LRUCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
+		8D9548C62D500C8200EA18E9 /* LRUCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUCacheTests.swift; sourceTree = "<group>"; };
 		8DB5D3692BD01DD600CD5989 /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
 		8DB5D36B2BD0208600CD5989 /* ThrottleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleTests.swift; sourceTree = "<group>"; };
 		8DB63E152918436600B70F17 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 				8DB5D3692BD01DD600CD5989 /* Throttle.swift */,
 				8D4852A22C319D17003EC64F /* Debounce.swift */,
 				8D903ED02CECD9D50028BC04 /* BinaryTree.swift */,
+				8D9548C42D50036E00EA18E9 /* LRUCache.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				8DB5D36B2BD0208600CD5989 /* ThrottleTests.swift */,
 				8D4852A42C31AC20003EC64F /* DebounceTests.swift */,
 				8D04A75F2D0F592B00974873 /* BinaryTreeTests.swift */,
+				8D9548C62D500C8200EA18E9 /* LRUCacheTests.swift */,
 			);
 			path = DataStructuresTests;
 			sourceTree = "<group>";
@@ -836,6 +842,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9548C52D50036E00EA18E9 /* LRUCache.swift in Sources */,
 				8D65C4BD2947522800E5BFEB /* Stack.swift in Sources */,
 				8D903ED12CECD9D50028BC04 /* BinaryTree.swift in Sources */,
 				8D4217412916F21000D9C2E0 /* Matrix.swift in Sources */,
@@ -854,6 +861,7 @@
 				8D04A7602D0F592B00974873 /* BinaryTreeTests.swift in Sources */,
 				8D4217432916F21D00D9C2E0 /* MatrixTests.swift in Sources */,
 				8D4852A52C31AC20003EC64F /* DebounceTests.swift in Sources */,
+				8D9548C72D500C8200EA18E9 /* LRUCacheTests.swift in Sources */,
 				8D4217712916F5CB00D9C2E0 /* BigIntTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
