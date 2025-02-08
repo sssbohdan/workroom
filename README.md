@@ -9,3 +9,4 @@ So far here you can find:
 * BigInt
 * Matrix, Queue, Stack, List, Binary Tree
 * Throttle & Debounce
+* MD2 hash function
