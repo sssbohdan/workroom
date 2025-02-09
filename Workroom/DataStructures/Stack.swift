@@ -8,7 +8,7 @@
 import Foundation
 
 struct Stack<Element> {
-    private var array = [Element]()
+    private var array = ContiguousArray<Element>()
 
     @discardableResult
     mutating  func pop() -> Element? {
@@ -17,5 +17,17 @@ struct Stack<Element> {
 
     mutating func push(_ element: Element) {
         array.append(element)
+    }
+
+    func peek() -> Element? {
+        array.last
+    }
+
+    var isEmpty: Bool {
+        array.isEmpty
+    }
+
+    var count: Int {
+        array.count
     }
 }
