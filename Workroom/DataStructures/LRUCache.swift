@@ -7,113 +7,75 @@
 
 import Foundation
 
-public final class LRUCache<Object: Hashable> {
-    private lazy var _cache = [String: Object]()
-    private let limit: Int
-    private lazy var lastUsedIndices = [String: Int]()
+final class LRUCache<Key: Hashable, Value> {
+    private class Node {
+        let key: Key
+        var value: Value
+        weak var prev: Node?
+        var next: Node?
 
-    init(limit: Int) {
-        self.limit = limit
+        init(key: Key, value: Value) {
+            self.key = key
+            self.value = value
+        }
     }
 
-    public func setObject(_ object: Object, for key: String) {
-        if _cache.values.count > limit {
-            let toRemove = lastUsedIndices.min {
-                $0.value > $1.value
-            }!.key
-            _cache[toRemove] = nil
-            lastUsedIndices[toRemove] = nil
-        }
+    private let capacity: Int
+    private var dict = [Key: Node]()
+    private var head: Node?
+    private var tail: Node?
 
-        _cache[key] = object
-        lastUsedIndices[key] = lastUsedIndices.max {
-            $0.value > $1.value
-        }?.value
+    init(capacity: Int) {
+        self.capacity = capacity
     }
 
-    public func object(for key: String) -> Object? {
-        lastUsedIndices.keys.forEach {
-            lastUsedIndices[$0, default: 0] -= 1
-        }
-        lastUsedIndices[key,default: 0] += 1
+    func object(for key: Key) -> Value? {
+        guard let node = dict[key] else { return nil }
+        moveToHead(node)
+        return node.value
+    }
 
-        return _cache[key]
+    func setObject(_ object: Value, for key: Key) {
+        if let node = dict[key] {
+            node.value = object
+            moveToHead(node)
+        } else {
+            let newNode = Node(key: key, value: object)
+            if dict.count == capacity, let tail = tail {
+                // Evict the least recently used
+                dict[tail.key] = nil
+                remove(tail)
+            }
+            dict[key] = newNode
+            addToHead(newNode)
+        }
+    }
+
+    private func addToHead(_ node: Node) {
+        node.next = head
+        node.prev = nil
+        head?.prev = node
+        head = node
+        if tail == nil {
+            tail = node
+        }
+    }
+
+    private func remove(_ node: Node) {
+        if let prev = node.prev {
+            prev.next = node.next
+        } else {
+            head = node.next
+        }
+        if let next = node.next {
+            next.prev = node.prev
+        } else {
+            tail = node.prev
+        }
+    }
+
+    private func moveToHead(_ node: Node) {
+        remove(node)
+        addToHead(node)
     }
 }
-
-
-
-//final class LRUCache<Key: Hashable, Value> {
-//    private class Node {
-//        let key: Key
-//        var value: Value
-//        var prev: Node?
-//        var next: Node?
-//
-//        init(key: Key, value: Value) {
-//            self.key = key
-//            self.value = value
-//        }
-//    }
-//
-//    private let capacity: Int
-//    private var dict = [Key: Node]()
-//    private var head: Node?  // Most recently used
-//    private var tail: Node?  // Least recently used
-//
-//    init(capacity: Int) {
-//        self.capacity = capacity
-//    }
-//
-//    func get(_ key: Key) -> Value? {
-//        guard let node = dict[key] else { return nil }
-//        moveToHead(node)
-//        return node.value
-//    }
-//
-//    func set(_ key: Key, value: Value) {
-//        if let node = dict[key] {
-//            node.value = value
-//            moveToHead(node)
-//        } else {
-//            let newNode = Node(key: key, value: value)
-//            if dict.count == capacity, let tail = tail {
-//                // Evict the least recently used
-//                dict[tail.key] = nil
-//                remove(tail)
-//            }
-//            dict[key] = newNode
-//            addToHead(newNode)
-//        }
-//    }
-//
-//    // Helper methods to manage the linked list:
-//
-//    private func addToHead(_ node: Node) {
-//        node.next = head
-//        node.prev = nil
-//        head?.prev = node
-//        head = node
-//        if tail == nil {
-//            tail = node
-//        }
-//    }
-//
-//    private func remove(_ node: Node) {
-//        if let prev = node.prev {
-//            prev.next = node.next
-//        } else {
-//            head = node.next
-//        }
-//        if let next = node.next {
-//            next.prev = node.prev
-//        } else {
-//            tail = node.prev
-//        }
-//    }
-//
-//    private func moveToHead(_ node: Node) {
-//        remove(node)
-//        addToHead(node)
-//    }
-//}
