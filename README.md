@@ -7,6 +7,6 @@ So far here you can find:
 * DI container
 * Reactive pattern
 * BigInt
-* Matrix, Queue, Stack, List, Binary Tree
+* Matrix, Queue, Stack, List, Binary Tree, LRU Cache
 * Throttle & Debounce
 * MD2 hash function
