@@ -14,6 +14,8 @@
 		8D0A1F4F2B878A8000B47159 /* Algorithms.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D0A1F412B878A7F00B47159 /* Algorithms.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D0A1F522B878A8000B47159 /* Algorithms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0A1F3F2B878A7F00B47159 /* Algorithms.framework */; };
 		8D0A1F532B878A8000B47159 /* Algorithms.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0A1F3F2B878A7F00B47159 /* Algorithms.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8D31504E2D5A73DE00ACD595 /* TopologicalSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31504D2D5A73DE00ACD595 /* TopologicalSort.swift */; };
+		8D3150502D5A7E6800ACD595 /* TopologicalSortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31504F2D5A7E6800ACD595 /* TopologicalSortTests.swift */; };
 		8D4216CE2916F14000D9C2E0 /* WorkroomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4216CD2916F14000D9C2E0 /* WorkroomApp.swift */; };
 		8D4216D02916F14000D9C2E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4216CF2916F14000D9C2E0 /* ContentView.swift */; };
 		8D4216D22916F14200D9C2E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D4216D12916F14200D9C2E0 /* Assets.xcassets */; };
@@ -170,6 +172,8 @@
 		8D0A1F412B878A7F00B47159 /* Algorithms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Algorithms.h; sourceTree = "<group>"; };
 		8D0A1F462B878A8000B47159 /* AlgorithmsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlgorithmsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0A1F4D2B878A8000B47159 /* AlgorithmsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmsTests.swift; sourceTree = "<group>"; };
+		8D31504D2D5A73DE00ACD595 /* TopologicalSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologicalSort.swift; sourceTree = "<group>"; };
+		8D31504F2D5A7E6800ACD595 /* TopologicalSortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologicalSortTests.swift; sourceTree = "<group>"; };
 		8D4216CA2916F14000D9C2E0 /* Workroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4216CD2916F14000D9C2E0 /* WorkroomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkroomApp.swift; sourceTree = "<group>"; };
 		8D4216CF2916F14000D9C2E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 			children = (
 				8D0A1F412B878A7F00B47159 /* Algorithms.h */,
 				8D04A7612D0F6E5600974873 /* MD2.swift */,
+				8D31504D2D5A73DE00ACD595 /* TopologicalSort.swift */,
 			);
 			path = Algorithms;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 			children = (
 				8D0A1F4D2B878A8000B47159 /* AlgorithmsTests.swift */,
 				8D5007692D158B3300EECB35 /* MD2Tests.swift */,
+				8D31504F2D5A7E6800ACD595 /* TopologicalSortTests.swift */,
 			);
 			path = AlgorithmsTests;
 			sourceTree = "<group>";
@@ -792,6 +798,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D04A7622D0F6E5600974873 /* MD2.swift in Sources */,
+				8D31504E2D5A73DE00ACD595 /* TopologicalSort.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,6 +808,7 @@
 			files = (
 				8D0A1F4E2B878A8000B47159 /* AlgorithmsTests.swift in Sources */,
 				8D50076A2D158B3300EECB35 /* MD2Tests.swift in Sources */,
+				8D3150502D5A7E6800ACD595 /* TopologicalSortTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
