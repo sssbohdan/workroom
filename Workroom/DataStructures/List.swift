@@ -42,12 +42,11 @@ struct List<Element> {
     }
 
     func hasCycles() -> Bool {
-        var slow = head
-        var fast = head.next
+        var slow: Node? = head
+        var fast: Node? = head
 
-
-        while fast != nil {
-            slow = slow.next!
+        while fast?.next != nil {
+            slow = slow?.next
             fast = fast?.next?.next
 
             if fast === slow {
@@ -57,4 +56,5 @@ struct List<Element> {
 
         return false
     }
+
 }

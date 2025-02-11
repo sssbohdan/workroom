@@ -27,7 +27,6 @@ func topologicalSortBFS<T: Hashable>(_ graph: [T: [T]]) -> [T] {
         }
     }
 
-    // Process the queue
     while !queue.isEmpty {
         let node = queue.removeFirst()
         result.append(node)
